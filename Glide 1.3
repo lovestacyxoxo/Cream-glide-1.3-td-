@@ -1,4 +1,6 @@
 local player = game.Players.LocalPlayer
+local userInputService = game:GetService("UserInputService")
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = player:WaitForChild("PlayerGui")
 
@@ -78,5 +80,12 @@ local function activateButton2()
     button2CooldownActive = false
     imageButton.Visible = true -- Show button again after cooldown
 end
+
+-- Bind ability to Q key
+userInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.KeyCode == Enum.KeyCode.Q then
+        activateButton2()
+    end
+end)
 
 imageButton.MouseButton1Click:Connect(activateButton2)
